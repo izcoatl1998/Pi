@@ -1,8 +1,8 @@
 #include <Pi.h>
 int lectura_adc=0 ;
-int16 valor_lectura=0,pot_humedad=0,pot_presion=0,pot_temperatura;
+double valor_lectura=0,pot_humedad=0,pot_presion=0,pot_temperatura;
 int flag_an0=0, flag_an1=0,flag_an2=0;
-
+double porcentaje_presion=0, porcentaje_humedad;
 #INT_AD
 void isr_adc(){
    valor_lectura = read_adc(adc_read_only);
@@ -39,17 +39,19 @@ void main()
       }
       if(flag_an2 == 1 && lectura_adc == 1){
          pot_humedad = valor_lectura;
+         porcentaje_humedad = ((pot_humedad/1023)*100);
          flag_an0 = 1;
          flag_an1 = 0;
          flag_an2=0;
          lectura_adc = 0;
          set_adc_channel(0);
          read_adc(ADC_START_ONLY);
+         
       }
       printf("\f");
-      printf("valor: %li ",pot_temperatura);
-      printf("\r valor: %li ",pot_presion);
-      printf("\r valor: %li ",pot_humedad);
+      printf("valor: %.0f ",pot_temperatura);
+      printf("\r valor: %.0f ",pot_presion);
+      printf("\r valor: %.0f porcentaje : %f",pot_humedad,porcentaje_humedad);
       
       
    }
