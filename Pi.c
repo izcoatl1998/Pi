@@ -21,7 +21,7 @@ void main()
    {
          if(flag_an0 == 1 && lectura_adc == 1){
          pot_temperatura = valor_lectura;
-         pot_temperatura =(pot_humedad*150)/308;
+         pot_temperatura =(pot_temperatura*125)/308;
          flag_an0 = 0;
          flag_an1 = 1;
          lectura_adc = 0;
@@ -38,7 +38,7 @@ void main()
          read_adc(ADC_START_ONLY);
       }
       if(flag_an2 == 1 && lectura_adc == 1){
-         pot_temperatura = valor_lectura;
+         pot_humedad = valor_lectura;
          flag_an0 = 1;
          flag_an1 = 0;
          flag_an2=0;
@@ -47,8 +47,9 @@ void main()
          read_adc(ADC_START_ONLY);
       }
       printf("\f");
-      printf("valor: %li ",pot_humedad);
+      printf("valor: %li ",pot_temperatura);
       printf("\r valor: %li ",pot_presion);
+      printf("\r valor: %li ",pot_humedad);
       
       
    }
